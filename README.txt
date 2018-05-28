@@ -1,1 +1,0 @@
-Machine Plays is a machine learning algorithm dedicated to playing through a platformer made by me.
