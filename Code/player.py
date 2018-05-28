@@ -18,20 +18,35 @@ class machine_player():
     def close_game(self):
         self.app.kill()
 
-    def send_control(self, btn):
+    def press_control(self, btn):
         if not any(btn.lower() == control for control in self.controls):
             return False
-        self.dlg.click_input()
         pyautogui.keyDown(btn.lower())
         pyautogui.keyUp(btn.lower())
         return True
+
+    def set_control(self, btn):
+        if not any(btn.lower() == control for control in self.controls):
+            return False
+        pyautogui.keyDown(btn.lower())
+        return True
+
+    def release_control(self, btn):
+        if not any(btn.lower() == control for control in self.controls):
+            return False
+        pyautogui.keyUp(btn.lower())
 
 
 if __name__ == '__main__':
     m = machine_player()
     app = m.open_game()
+    m.dlg.click_input()
     start = time.time()
     while time.time() - start < 5:
-        if not m.send_control("right"):
-            print "What"
+        m.set_control("right")
+    m.release_control("right")
+    m.press_control('space')
+    start = time.time()
+    while time.time() - start < 3:
+        continue
     m.close_game()
