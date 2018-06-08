@@ -157,7 +157,7 @@ class machine_player():
 
             # store the transition in D
             self.dq.append((s_t, action_index, r_t, s_t1, terminal))
-            if len(self.dq) > REPLAY_MEMORY:
+            if len(self.dq) > self.replay_memory:
                 self.dq.popleft()
 
             #only train if done observing
